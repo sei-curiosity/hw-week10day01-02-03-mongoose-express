@@ -1,1 +1,1 @@
-var Schema = require("../db/schema.js");
+let Schema = require("../db/schema.js");

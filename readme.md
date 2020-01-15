@@ -39,6 +39,8 @@ You'll begin by creating an app that performs CRUD functionality on a database u
 
 8. Write methods to add and remove embedded menu item documents for a restaurant of your choosing.
 
+- Send pull request with the title "Part 1 solution"
+
 ## Part II: Add Express
 
 > You will know how to do this after Monday morning's Express + Mongoose lesson. Feel free, however, to give this a shot over the weekend.
@@ -53,3 +55,8 @@ Your app should have two pages...
   - Update the restaurant.
   - Create a new menu item for the restaurant.
   - Delete a menu item from the restaurant.
+  
+ > Additional: Use HBS to render your server side views
+ 
+ - Send pull request with the title "Part 2 solution"
+ 

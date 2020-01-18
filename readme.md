@@ -43,7 +43,6 @@ You'll begin by creating an app that performs CRUD functionality on a database u
 
 ## Part II: Add Express
 
-> You will know how to do this after Monday morning's Express + Mongoose lesson. Feel free, however, to give this a shot over the weekend.
 
 Turn YUM into an Express app with routes that you can view in your browser and forms that manipulate your data with full CRUD.
 

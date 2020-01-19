@@ -2,3 +2,33 @@ const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/yum');
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
+
+let Schema = mongoose.Schema
+let restaurantSchema = new Schema ({
+    name: String,
+    address: String,
+    street: String,
+    zipcode: Number,
+})
+let menuSchema = new Schema ({
+    title: String,
+    resturant: [resturantSchema]
+})
+
+let resturantModel = mongoose.model("resturant", resturantSchema)
+
+resturantModel.create({name: "dominos", address: "almathar"})
+.then((resturant)=>{
+    console.log(resturant)
+})
+.catch((error)=>{
+    console.log(error)
+})
+
+resturantModel.create({name: "mac", address: "almurabba"})
+.then((resturant)=>{
+    console.log(resturant)
+})
+.catch((error)=>{
+    console.log(error)
+})

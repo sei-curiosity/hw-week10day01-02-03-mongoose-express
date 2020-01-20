@@ -31,10 +31,47 @@ const thresaurant = new RestaurantModel ({
 })
 
 const allrestaurant = [stresaurant,scresaurant,thresaurant]
-RestaurantModel.insertMany(allrestaurant)
+RestaurantModel.findOne("allrestaurant")
 .then(()=>{
     console.log(`Restaurant added ${allrestaurant.length} to database`)
 })
 .catch((error) => {
     console.log(error)
 })
+
+RestaurantModel.findOne({name: "Wow ME"})
+.then((restaurant)=>{
+    console.log(`The name of the restaurant is ${restaurant} `)
+})
+.catch((error) => {
+    console.log(error)
+})
+
+RestaurantModel.find({"address.zipcode":14244})
+.then((restaurant)=>{
+    console.log(`The zipCode of the restaurant is ${restaurant} `)
+})
+.catch((error) => {
+    console.log(error)
+})
+
+const update = (id,field,value) =>
+RestaurantModel.findById(id)
+.then((restaurant)=>{
+    restaurant.address[field] = value
+    return restaurant.save()
+})
+.catch((error) => {
+    console.log(error)
+    .then(restaurant => {
+        console.log(`${restaurant} updated`)
+    })
+})
+
+
+const destroy = (id) =>
+RestaurantModel.findById(id)
+.then((restaurant)=>{
+    return restaurant.remove()
+})
+.catch(console.error)

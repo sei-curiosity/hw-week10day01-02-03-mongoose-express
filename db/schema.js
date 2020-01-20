@@ -10,11 +10,17 @@ let MenuItemSchema=new Schema({
 });
 
 let RestaurantScheme=new Schema({
-    name:String,
-    address:{street:String,zipcode:Number},
-    yelpUrl:String,
-    items:[MenuItemSchema]
-});
+    name:{type:String,require:true},
+    address:{type:String,require:true},
+    yelpUrl:{type:String,require:true},
+    //items:[MenuItemSchema]
+},{timestamps:true});
 
 let MenuItemModel=mongoose.model('MenuItem', MenuItemSchema);
 let RestaurantModel=mongoose.model('Restaurant', RestaurantScheme);
+
+module.exports={
+
+MenuItemModel:MenuItemModel,
+RestaurantModel:RestaurantModel
+}

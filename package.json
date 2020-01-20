@@ -9,6 +9,16 @@
   "author": "SEI9",
   "license": "ISC",
   "dependencies": {
-    "mongoose": "^5.8.7"
-  }
+    "mongoose": "^5.8.7",
+    "nodemon": "^2.0.2"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/roush55/hw-week10day01-02-03-mongoose-express.git"
+  },
+  "bugs": {
+    "url": "https://github.com/roush55/hw-week10day01-02-03-mongoose-express/issues"
+  },
+  "homepage": "https://github.com/roush55/hw-week10day01-02-03-mongoose-express#readme"
 }

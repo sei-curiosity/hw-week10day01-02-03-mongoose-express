@@ -50,3 +50,14 @@ const findRestaurantByName = name => {
 };
 
 findRestaurantByName(/STARBUCKS/gi);
+
+// find by zipcode
+const findByZipCode = zipcode => {
+  Schema.Restaurant.find()
+    .where("address.zipcode", zipcode)
+    .then(console.log)
+    .then(close)
+    .catch(err => console.log("Unable to create new restaurant", err));
+};
+
+findByZipCode(8174961); // note: this will return array !

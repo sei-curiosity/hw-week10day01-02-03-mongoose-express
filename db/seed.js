@@ -16,13 +16,6 @@ let breakfast = new MenuModel({
 })
 
 
-
-let menu =[dinner,lunch,breakfast]
-
-
-
-
-
 let kabab = new RestaurantModel({
     name:"kabab",
     yelpUrl:"don't know what the hell doesn't that mean",
@@ -56,4 +49,54 @@ let kabab3 = new RestaurantModel({
 })
 
 
+const restaurants = [kabab,kabab1,kabab2,kabab3]
+let menu =[dinner,lunch,breakfast]
 
+
+restaurants.insertMany(restaurant)
+.then(()=>{
+    console.log(`Add resturant ${restaurant}`)
+})
+
+menu.remove()
+.then(()=>{
+    console.log("deleted ")
+})
+.catch(error=>{
+
+    console.log(error)
+})
+
+
+restaurants.remove()
+.then(()=>{
+    console.log("deleted ")
+})
+.catch(error=>{
+    console.log(error)
+})
+
+
+const index = function(){
+    restaurants.find()
+    .then(restaurant => {
+        console.log(restaurant)
+    })
+    .catch(console.error)
+}
+
+const update = (id,field,value) => {
+    restaurants.findById(id)
+    .then(restaurant => {
+        restaurant[field] = value
+        return restaurant.save()
+    })
+    .catch(console.error)
+}
+
+const destroy = (id) => {
+    menu.findById(id)
+    .then(menu => {
+        return menu.remove()
+    })
+}

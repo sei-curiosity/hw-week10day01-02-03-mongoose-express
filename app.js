@@ -110,7 +110,18 @@ const destroy = (id) => {
 }
 //destroy('5e2674df6253e160877822a2')
 //index()
+
+const destroy = (item,id) => {
+    let rest = Restaurant.find({items})
+    rest.find()
+    .then(restuarant => {
+    return restuarant.remove()
+})
+.catch(console.error)
+.then(done)
+}
 //<<<
+
 
 
 // update 
@@ -130,13 +141,3 @@ const update = (id,field,value) => {
 //<<<
 
 
-//doesn't work 
-const updateMenu = (id,value) => {
-    Menu.findById(id)
-    .then(item => {
-        item.name = value
-        return item.save()
-    })
-    .catch(console.error)
-    .then(done)
-}

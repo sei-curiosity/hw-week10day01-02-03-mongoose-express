@@ -18,16 +18,16 @@ You'll begin by creating an app that performs CRUD functionality on a database u
 
 2. Adds seed data for the restaurant and menu items...
 
-  - A restaurant should have the following field names...
+- A restaurant should have the following field names...
 
-    * `name` - a string
-    * `address` - an object with a `street` (string) and `zipcode` property (number)
-    * `yelpUrl` - a string
-    * `items` - an array containing your MenuItems schema
+  - `name` - a string
+  - `address` - an object with a `street` (string) and `zipcode` property (number)
+  - `yelpUrl` - a string
+  - `items` - an array containing your MenuItems schema
 
-  - A menu item should contain the followin...
+- A menu item should contain the followin...
 
-    * `title` - a string
+  - `title` - a string
 
 3. Create a new restaurant.
 
@@ -45,19 +45,18 @@ You'll begin by creating an app that performs CRUD functionality on a database u
 
 ## Part II: Add Express
 
-
 Turn YUM into an Express app with routes that you can view in your browser and forms that manipulate your data with full CRUD.
 
 Your app should have two pages...
 
 - A page that lists all restaurants, on which a user can create a new restaurant.
 - A page that lists one restaurant and all its menu items, on which a user can...
+
   - Delete the restaurant.
   - Update the restaurant.
   - Create a new menu item for the restaurant.
   - Delete a menu item from the restaurant.
-  
- > Additional: Use HBS to render your server side views
- 
- - Send pull request with the title "Part 2 solution"
- 
+
+> Additional: Use HBS to render your server side views
+
+- Send pull request with the title "Part 2 solution"

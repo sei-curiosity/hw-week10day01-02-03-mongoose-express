@@ -34,9 +34,19 @@ const items = [
   createMenuItem("Four Cheese")
 ];
 
-createRestaurant(
-  "STARBUCKS COFFEE",
-  { street: "Oliya", zipcode: 00000 },
-  "yelp.com/starbucks-coffee",
-  items
-);
+// createRestaurant(
+//   "STARBUCKS COFFEE",
+//   { street: "Oliya", zipcode: 00000 },
+//   "yelp.com/starbucks-coffee",
+//   items
+// );
+
+// find by name
+const findRestaurantByName = name => {
+  Schema.Restaurant.findOne({ name })
+    .then(console.log)
+    .then(close)
+    .catch(err => console.log("Unable to create new restaurant", err));
+};
+
+findRestaurantByName(/STARBUCKS/gi);

@@ -1,3 +1,4 @@
+const mongoose = require("mongoose");
 let { Restaurant, MenuItem } = require("./schema.js");
 
 mongoose.connect("mongodb://localhost/yum", {

@@ -1,4 +1,11 @@
-let { Restaurant, MenuItem, db } = require("./schema.js");
+let { Restaurant, MenuItem } = require("./schema.js");
+
+mongoose.connect("mongodb://localhost/yum", {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+});
+
+const db = mongoose.connection;
 
 const restaurant2 = new Restaurant({
   name: "Dunkkin",

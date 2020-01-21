@@ -10,5 +10,14 @@
   "license": "ISC",
   "dependencies": {
     "mongoose": "^5.8.7"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mashaelakh/hw-week10day01-02-03-mongoose-express.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mashaelakh/hw-week10day01-02-03-mongoose-express/issues"
+  },
+  "homepage": "https://github.com/mashaelakh/hw-week10day01-02-03-mongoose-express#readme"
 }

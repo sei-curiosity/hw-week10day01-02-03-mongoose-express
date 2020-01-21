@@ -1,7 +1,11 @@
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/yum');
+mongoose.connect('mongodb://localhost/yum', {
+    useNewUrlParser: true , useUnifiedTopology: true, 
+    useFindAndModify: false, useCreateIndex: true });
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
+// case error
+db.once('open',()=> console.log("connected")) // case succsses
 
 let Schema = mongoose.Schema
 let restaurantSchema = new Schema ({

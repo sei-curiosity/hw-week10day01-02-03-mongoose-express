@@ -94,6 +94,10 @@ const update = (id,field,value) => {
     .catch(console.error)
 }
 
+
+
+
+
 const destroy = (id) => {
     menu.findById(id)
     .then(menu => {

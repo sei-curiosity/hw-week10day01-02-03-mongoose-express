@@ -16,5 +16,7 @@ router.get('/resturant',(req,res)=> {
         
     )
 })
+// index()
+
 
 module.exports = router

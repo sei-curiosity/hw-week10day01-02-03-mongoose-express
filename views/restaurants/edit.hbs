@@ -1,0 +1,22 @@
+<form action="/restaurants/{{restaurant._id}}/edit?_method=PUT" method="POST">
+<div>
+    <label for="name">name:</label>
+    <input type="text" name="name" value="{{restaurant.name}}">
+ </div>
+<div>
+ 
+    <label for="address">Address:</label> <br/>
+    <label for="street">street:</label>
+    <input type="text" name="street" value="{{restaurant.address.street}}"></input>
+    <label for="zipcode">zipcode:</label>
+    <input type="text" name="zipcode" value="{{restaurant.address.zipcode}}"></input>    
+ </div>
+<div>
+    <label for="yelpUrl">yelp Url:</label>
+    <input type="text" name="name" value="{{restaurant.yelpUrl}}">
+ </div>
+  <div>
+    <input type="submit" value="Update Todo">
+  </div>
+  <a href="/todos">All TodoItems</a>
+</form>

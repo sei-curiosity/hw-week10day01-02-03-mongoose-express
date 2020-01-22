@@ -111,15 +111,16 @@ const destroy = (id) => {
 //destroy('5e2674df6253e160877822a2')
 //index()
 
-const destroy = (item,id) => {
-    let rest = Restaurant.find({items})
-    rest.find()
-    .then(restuarant => {
-    return restuarant.remove()
-})
-.catch(console.error)
-.then(done)
-}
+//not completed
+// const destroy = (item,id) => {
+//     let rest = Restaurant.find({items})
+//     rest.find()
+//     .then(restuarant => {
+//     return restuarant.remove()
+// })
+// .catch(console.error)
+// .then(done)
+// }
 //<<<
 
 

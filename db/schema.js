@@ -6,8 +6,11 @@ const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 // case error
 db.once('open',()=> console.log("connected")) // case succsses
-
 let Schema = mongoose.Schema
+let menuSchema = new Schema ({
+    title: String,
+})
+
 let restaurantSchema = new Schema ({
     name: String,
     address: {street: String,zipcode: Number},
@@ -15,11 +18,9 @@ let restaurantSchema = new Schema ({
     items: [menuSchema]
     
 })
-let menuSchema = new Schema ({
-    title: String,
-})
 
-let resturantModel = mongoose.model("resturant", resturantSchema)
+
+let resturantModel = mongoose.model("resturant", restaurantSchema)
 
 let menuModel = mongoose.model("menu", menuSchema)
 

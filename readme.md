@@ -39,12 +39,7 @@ You'll begin by creating an app that performs CRUD functionality on a database u
 
 7. Write a function or method that deletes a restaurant.
 
-8. Write methods to add and remove embedded menu item documents for a restaurant of your choosing.
-
-- Send pull request with the title "Part 1 solution"
-
 ## Part II: Add Express
-
 
 Turn YUM into an Express app with routes that you can view in your browser and forms that manipulate your data with full CRUD.
 
@@ -57,7 +52,13 @@ Your app should have two pages...
   - Create a new menu item for the restaurant.
   - Delete a menu item from the restaurant.
   
- > Additional: Use HBS to render your server side views
+ > Additional: Use HBS by passing the response objects eg. res.render('/abc/abc', {item}) to render your server side views
  
  - Send pull request with the title "Part 2 solution"
  
+ ## Part III: Updating sub models (1 to Many)
+ 
+CRDU operations with embedded documents
+Write methods to add, update, read and remove embedded menu item documents for a restaurant of your choosing.
+
+- Send pull request with the title "Part 3 solution"

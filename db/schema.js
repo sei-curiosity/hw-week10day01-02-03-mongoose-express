@@ -9,12 +9,14 @@ let MenuItemSchema=new Schema({
     title :String
 });
 
-let RestaurantScheme=new Schema({
+
+const RestaurantScheme=new Schema({
     name:{type:String,require:true},
     address:{type:String,require:true},
     yelpUrl:{type:String,require:true},
-    //items:[MenuItemSchema]
+    items:[MenuItemSchema]
 },{timestamps:true});
+
 
 let MenuItemModel=mongoose.model('MenuItem', MenuItemSchema);
 let RestaurantModel=mongoose.model('Restaurant', RestaurantScheme);

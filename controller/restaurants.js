@@ -23,7 +23,13 @@ function add(request, response) {
   response.render("restaurants/add");
 }
 
-function show(request, response) {}
+function show(request, response) {
+  Schema.Restaurant.findById(request.params.id)
+    .then(restaurant => {
+      response.render("restaurants/show", { data: restaurant });
+    })
+    .catch(console.log);
+}
 
 function create(request, response) {
   Schema.Restaurant.create({

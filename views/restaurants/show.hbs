@@ -1,0 +1,16 @@
+<div>
+    <h1>{{ data.name }}</h1>
+
+    <h1>{{ data.address.street }} - {{ data.address.zipcode }}</h1>
+
+    <a href="http://{{ data.yelpUrl }}" target="__blank">Yelp</a>
+
+    <ul>
+        {{#each data.items}}
+        <li>
+            {{this.title}}
+        </li>
+        {{/each}}
+
+    </ul>
+</div>

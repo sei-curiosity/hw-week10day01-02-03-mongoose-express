@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-let Schema = require("../db/schema");
+let Schema = require("../model/schema");
 
 let RestaurantModel = Schema.RestaurantModel;
 let MenueitemModel = Schema.MenueitemModel;

@@ -2,13 +2,16 @@
   "name": "yum",
   "version": "1.0.0",
   "description": "YUM!  Cookies!",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "author": "SEI9",
   "license": "ISC",
   "dependencies": {
+    "express": "^4.17.1",
+    "hbs": "^4.1.0",
     "mongoose": "^5.8.7",
     "nodemon": "^2.0.2"
   },

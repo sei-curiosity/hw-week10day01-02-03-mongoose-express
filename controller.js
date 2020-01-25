@@ -1,9 +1,5 @@
-const mongoose = require('mongoose');
-
-const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
+const db = require("./config")
 const Schema=require('./db/schema.js')
-
 const MenuItemModel =Schema.MenuItemModel
 const RestaurantModel=Schema.RestaurantModel
 const item1=new MenuItemModel({title:"burger"})
@@ -28,13 +24,17 @@ const create = (name,address,yelpUrl,items)=>{
   
 
 //create('herfy','street','ylep',items)
-const index=function(){
+const index=(req,res)=> {
     RestaurantModel.find({})
-    .then(resturants=>{
-        console.log(resturants)
-    })
-    .catch(console.error)
+    .then(
     
+        resturants => res.send(resturants)
+        )
+    
+    .catch(
+        err => console.error
+    )
 }
 index()
 
+module.exports = index;

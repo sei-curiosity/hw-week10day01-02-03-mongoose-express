@@ -10,6 +10,8 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(routes);
 
+app.set("view engine", "hbs");
+
 app.listen(8000, () =>
   console.log("Server is running at http://localhost:8000/ ...")
 );

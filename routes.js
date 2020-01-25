@@ -6,17 +6,20 @@ const menuController = require("./controller/menu");
 const router = Router();
 
 // restaurants endpoints
-router.get("/restaurants/", restaurantsController.index);
-router.get("/restaurants/:id/", restaurantsController.show);
-router.post("/restaurants/", restaurantsController.create);
-router.put("/restaurants/:id/", restaurantsController.update);
-router.delete("/restaurants/:id/", restaurantsController.destroy);
+router.get("/", restaurantsController.index);
+router.get("/new/", restaurantsController.add);
+router.get("/:id/edit/", restaurantsController.edit);
+
+router.get("/:id/", restaurantsController.show);
+router.post("/", restaurantsController.create);
+router.put("/:id/", restaurantsController.update);
+router.delete("/:id/", restaurantsController.destroy);
 
 // menu endpoints
-router.get("/restaurants/:id/menu/", menuController.index);
-router.get("/restaurants/:id/menu/:item/", menuController.show);
-router.post("/restaurants/:id/menu/", menuController.create);
-router.put("/restaurants/:id/menu/:item/", menuController.update);
-router.delete("/restaurants/:id/menu/:item/", menuController.destroy);
+router.get("/:id/menu/", menuController.index);
+router.get("/:id/menu/:item/", menuController.show);
+router.post("/:id/menu/", menuController.create);
+router.put("/:id/menu/:item/", menuController.update);
+router.delete("/:id/menu/:item/", menuController.destroy);
 
 module.exports = router;

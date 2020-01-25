@@ -1,0 +1,18 @@
+<div>
+    {{#each data}}
+    <h3>
+        <a href="/{{this._id}}">{{this.name}}</a>
+    </h3>
+    <h4>Street: {{this.address.street}}</h4>
+
+    <a href="/{{this._id}}/edit/">Edit</a>
+    {{!-- <a href="">Delete</a> --}}
+
+    <form action="/{{this._id}}?_method=DELETE" method="POST">
+        <input type="submit" value="Delete">
+    </form>
+
+
+    <hr />
+    {{/each}}
+</div>

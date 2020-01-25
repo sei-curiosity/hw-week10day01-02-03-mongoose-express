@@ -85,4 +85,5 @@ const deleteRestaurant = id => {
     .catch(console.log);
 };
 
-// deleteRestaurant("5e268bac80ae351053b7d0f2");
+deleteRestaurant("5e2689b7259b150d96b4f7d0");
+deleteRestaurant("5e2689b7259b150d96b4f7d1");

@@ -1,0 +1,8 @@
+<h1> Indexing All restaurants!</h1>
+
+<ul>
+  {{#each data}}
+    <li>{{this.name}} ||  {{this.address.street}} || {{this.address.zipcode}} || {{this.items}} </li> 
+    
+  {{/each}}
+</ul>

@@ -6,11 +6,11 @@ let  MenueModel = Schema.MenueModel
 
 const disconnect = ()=> db.close()
 
-let Breakfast1 = new MenueModel({ title: "Egg & Cheese" })
-let Breakfast2 = new MenueModel({ title: "Haloumi & Turkey" })
-let Breakfast3 = new MenueModel({ title: "Pancakes & Cream" })
+// let Breakfast1 = new MenueModel({ title: "Egg & Cheese" })
+// let Breakfast2 = new MenueModel({ title: "Haloumi & Turkey" })
+// let Breakfast3 = new MenueModel({ title: "Pancakes & Cream" })
 
-let breakfasts = [Breakfast1, Breakfast2, Breakfast3]
+// let breakfasts = [Breakfast1, Breakfast2, Breakfast3]
 
 // let McDonaldsRest = new RestaurantModel({  // create a new document
 //     name: "McDonalds", 

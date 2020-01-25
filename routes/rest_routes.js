@@ -1,10 +1,69 @@
 let mongoose = require('mongoose')
-let Schema = require("./db/schema")
+let Schema = require("../db/schema")
 let db = mongoose.connection
 let  RestaurantModel = Schema.RestaurantModel
 let  MenueModel = Schema.MenueModel
+const express = require('express')
+const router = express.Router()
+const hbs = require('hbs')
 
-const disconnect = ()=> db.close()
+// const disconnect = ()=> db.close()
+
+
+//index route
+router.get('/restaurants', (req, res) => {
+    RestaurantModel.find({})
+    .then( (restaurants) => {
+        // res.send(restaurants)
+        res.status(200).json({restaurants: restaurants})
+        //server side rendering
+        // res.render('restaurants', {
+        //     data: restaurants
+        // })
+        console.log(restaurants)
+    })
+    .catch( (error) => console.error)
+}) // end
+
+
+
+// show 
+router.get('/restaurants/:id', (req, res) => {
+    const rest_id = req.params.id
+    console.log(rest_id)
+    RestaurantModel.findOne({_id: rest_id})
+    .then( (restaurant) => {
+       res.render('restaurant', {
+           data: restaurant
+       })
+        console.log(`You are looking for ${restaurant} restaurant`)
+    })
+    .catch((error) => console.log(error))
+})
+
+
+// delete
+router.delete('/restaurants/:id', (req, res) => {
+    const rest_id = req.params.id
+    RestaurantModel.findByIdAndRemove(rest_id)
+    .then( () => console.log(`Deleted the restaurant with id: ${rest_id}`)
+    )
+    .catch( (error) => console.error)
+})
+
+
+// update 
+
+router.patch('/restaurants/:id', (req, res) => {
+    const rest_id = req.params.id
+    const restaurantUpdates = req.body.restaurant
+    console.log(req.body)
+    RestaurantModel.findByIdAndUpdate(rest_id, restaurantUpdates)
+        .then((restaurant) => {
+            console.log(restaurant)
+        })
+        .catch( (error) => console.error)
+})
 
 
 const create = (name, address, yelpUrl, items) => {
@@ -52,8 +111,8 @@ const findAllWithZip = (code) => {
 
 const update = (rest_id, update_name) => {
         RestaurantModel.findByIdAndUpdate(rest_id, {$set: {name: update_name}})
-        .then((student) => {
-            console.log(student)
+        .then((restaurant) => {
+            console.log(restaurant)
         })
         .catch( (error) => console.error)
         .then(disconnect)
@@ -117,3 +176,8 @@ const addMenuItem = (rest_id, newItem) => {
 } // end func
 
 // addMenuItem("5e25fb73bb27291b0d1e044c", "White Mocha 33") // send a document as a new menu item to be added to subdocument
+
+
+
+
+module.exports = router

@@ -1,4 +1,16 @@
-function index(request, response) {}
+const Schema = require("../db/schema");
+
+function index(request, response) {
+  Schema.Restaurant.findById(request.params.id).then(restaurant => {
+    const items = restaurant.items;
+
+    response.render("menu/index", { data: items });
+  });
+}
+
+function add(request, response) {}
+
+function edit(request, response) {}
 
 function show(request, response) {}
 

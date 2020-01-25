@@ -61,3 +61,28 @@ const findByZipCode = zipcode => {
 };
 
 findByZipCode(8174961); // note: this will return array !
+
+// update a restaurant
+
+const updateRestaurant = (id, data) => {
+  Schema.Restaurant.findByIdAndUpdate(id, data, {
+    new: true,
+    omitUndefined: true
+  })
+    .then(console.log)
+    .then(close)
+    .catch(console.log);
+};
+
+// updateRestaurant("5e268bac80ae351053b7d0f2", { name: "Mcdonalds" });
+
+// delete a restaurant
+
+const deleteRestaurant = id => {
+  Schema.Restaurant.findByIdAndDelete(id)
+    .then(console.log)
+    .then(close)
+    .catch(console.log);
+};
+
+// deleteRestaurant("5e268bac80ae351053b7d0f2");

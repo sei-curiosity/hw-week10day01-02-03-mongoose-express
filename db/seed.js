@@ -1,4 +1,4 @@
-let Schema = require("./db/schema.js");
+let Schema = require("./resturrantSchema");
 let mongoose = require('mongoose');
 
 let resturantModel = Schema.resturantModel;

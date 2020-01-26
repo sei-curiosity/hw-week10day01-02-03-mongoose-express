@@ -7,32 +7,12 @@ const db = mongoose.connection;
 
 db.on('error', console.error.bind(console, 'connection error:'));
 
+db.once('open',()=> console.info('Mongoose connected', '//', new Date()))
 
-  const done = function(){
-    console.log("connected to DB")
-    db.close()
-}
+    
+module.exports = db 
 
-  let menueItem = new mongoose.Schema ({
-    title: String,
-  })
 
-let resturantSchema = new mongoose.Schema ({
-    name: String,
-    yelpUrl: String,
-    items:[menueItem],
-    address:{
-        street:String,
-        zipcode:Number
-    }
-})
-let restrentModel = mongoose.model("restrunt",resturantSchema )
-let menuModel = mongoose.model("Menue", menueItem)
-
-module.exports = {
-  restrentModel: restrentModel,
-  menuModel: menuModel
-}
 // restrentModel.create({ name: 'the cheeseCake factory ', 
 // yelpUrl: 'https://www.yelp.com/biz/the-cheesecake-factory-san-francisco-2?osq=The+Cheesecake+Factory',
 // item:[menueItem[0]],
@@ -77,27 +57,32 @@ module.exports = {
 //         console.log(error)
 //       })
 //   })
-const update = (id,field,value) =>{
- restrentModel.findById(id)
-  .then(rest => { 
-      console.log(rest[field])
-      rest[field] = value
-      rest.save()
-  })
-  .then(console.error)
-  .then(done)
-}
-
-update('5e262b84b1b5204c7ba5696d', 'name','Mona Lisa')
 
 
-const destroy = (id) => {
-  restrentModel.findById(id)
-  .then(rest => {
-      rest.remove()
-  })
-  .catch(console.error)
-  .then(done)
+// -- remove 
 
-}
-destroy('5e262b84b1b5204c7ba5696d')
+
+// const update = (id,field,value) =>{
+//  restrentModel.findById(id)
+//   .then(rest => { 
+//       console.log(rest[field])
+//       rest[field] = value
+//       rest.save()
+//   })
+//   .then(console.error)
+//   .then(done)
+// }
+
+// update('5e262b84b1b5204c7ba5696d', 'name','Mona Lisa')
+
+
+// const destroy = (id) => {
+//   restrentModel.findById(id)
+//   .then(rest => {
+//       rest.remove()
+//   })
+//   .catch(console.error)
+//   .then(done)
+
+// }
+// destroy('5e262b84b1b5204c7ba5696d')

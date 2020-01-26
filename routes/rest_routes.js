@@ -10,12 +10,14 @@ const hbs = require('hbs')
 // const disconnect = ()=> db.close()
 
 
-//index route
+// index route
 router.get('/restaurants', (req, res) => {
     RestaurantModel.find({})
     .then( (restaurants) => {
-        // res.send(restaurants)
-        res.status(200).json({restaurants: restaurants})
+        res.send({
+            restaurants: restaurants
+        })
+        // res.status(200).json({restaurants: restaurants})
         //server side rendering
         // res.render('restaurants', {
         //     data: restaurants
@@ -33,9 +35,10 @@ router.get('/restaurants/:id', (req, res) => {
     console.log(rest_id)
     RestaurantModel.findOne({_id: rest_id})
     .then( (restaurant) => {
-       res.render('restaurant', {
-           data: restaurant
-       })
+        res.send({restaurant})
+    //    res.render('restaurant', {
+    //        data: restaurant
+    //    })
         console.log(`You are looking for ${restaurant} restaurant`)
     })
     .catch((error) => console.log(error))
@@ -46,7 +49,10 @@ router.get('/restaurants/:id', (req, res) => {
 router.delete('/restaurants/:id', (req, res) => {
     const rest_id = req.params.id
     RestaurantModel.findByIdAndRemove(rest_id)
-    .then( () => console.log(`Deleted the restaurant with id: ${rest_id}`)
+    .then( () => {
+        res.redirect('/restaurants')
+        console.log(`Deleted the restaurant with id: ${rest_id}`)}
+
     )
     .catch( (error) => console.error)
 })
@@ -54,128 +60,108 @@ router.delete('/restaurants/:id', (req, res) => {
 
 // update 
 
-router.patch('/restaurants/:id', (req, res) => {
+router.put('/restaurants/:id', (req, res) => {
     const rest_id = req.params.id
-    const restaurantUpdates = req.body.restaurant
+    const restaurantUpdates = req.body
     console.log(req.body)
     RestaurantModel.findByIdAndUpdate(rest_id, restaurantUpdates)
-        .then((restaurant) => {
-            console.log(restaurant)
+        .then((updatedRestaurant) => {
+            res.redirect(`/restaurants/${updatedRestaurant._id}`)
+            console.log(updatedRestaurant)
         })
         .catch( (error) => console.error)
 })
 
 
-const create = (name, address, yelpUrl, items) => {
-    const restaurantParams = {
-        name: name,
-        address: address,
-        yelpUrl: yelpUrl,
-        items:  items 
-        }
-    RestaurantModel.create(restaurantParams)
-    .then((restaurant) => {
-        console.log(restaurant)
-    })
-    .catch((error) => console.log(error))
-    .then(disconnect)
-     
 
-}   // end create func  
+//// CRUD ON MENU
 
-// create("Burger King", {street: "ALkhaleej", zipcode: 555555}, "IDK", breakfasts)
-
-
-const find = (restaurantName) => {
-    RestaurantModel.findOne({name: restaurantName}) // a condition where the key name is equal to the parameter restaurantName
+// indexing all menu items for specific restaurant by restaurant name
+router.get('/restaurant/?', (req, res) => {
+    const restName = req.query.restName
+    // console.log(rest_query)
+    RestaurantModel.findOne({name: restName})
     .then( (restaurant) => {
-        console.log(`You are looking for ${restaurant} restaurant`)
-    })
-    .catch((error) => console.log(error))
-    .then(disconnect)
-} // end func
-
-// find("Urth")
-
-
-const findAllWithZip = (code) => {
-    RestaurantModel.find({"address.zipcode": code } )
-    .then( (restaurants) => {
-        console.log(restaurants)
-    })
-    .catch( (error) => console.error)
-    .then(disconnect)
-} // end func
-
-// findAllWithZip(66666)
-
-const update = (rest_id, update_name) => {
-        RestaurantModel.findByIdAndUpdate(rest_id, {$set: {name: update_name}})
-        .then((restaurant) => {
-            console.log(restaurant)
+        res.send({
+            items: restaurant.items
         })
-        .catch( (error) => console.error)
-        .then(disconnect)
-} // end func
-
-// update("5e25fa3119ad4819e28ccc4a", "Updated McDonalds")
-
-
-const findAll = () => {
-    RestaurantModel.find({})
-    .then( (restaurants) => {
-        console.log(restaurants)
     })
-    .catch( (error) => console.error)
-    .then(disconnect)
-} // end func
+    .catch((error) => console.log(error))
+})
 
-// findAll()
-
-
-const destroy = (rest_id) => {
-    RestaurantModel.findByIdAndRemove(rest_id)
-  .then(findAll => console.log(`Deleted the item with id: ${rest_id}`))
-  .catch( (error) => console.error)
-  .then(disconnect)
-
-} // end func
-
-// destroy("5e2601f88c0c7e1d9cad95d0")
-
-
-
-
-const addMenuItem = (rest_id, newItem) => {
-
-    let mItem
-    let foundRest 
-
-    RestaurantModel.findById(rest_id)
+// show single menue item
+router.get('/restaurants/:restid/items/:itemid', (req, res) => {
+    const restid = req.params.restid
+    const itemid = req.params.itemid
+    console.log(restid)
+    console.log(itemid)
+    RestaurantModel.findById(restid)
     .then( (restaurant) => {
-        foundRest = restaurant
-        console.log(foundRest) 
+        const item = restaurant.items.find( item => item._id == itemid)
+        res.send({item})
+        console.log(item)
     })
-    .catch( (error) => console.error)
+    .catch((error) => console.log(error))
+})
+//localhost:3000/restaurant/?restName=McDonalds One/?itemName=Egg & Cheese
 
 
 
-    MenueModel.create({title: newItem})
-    .then(item => {
-        mItem = item
-        console.log(mItem)    
+// add new item for single rest
+router.post('/restaurant/:restid', (req, res) => {
+    const restid = req.params.restid
+    const nItem = req.body // {"title": "oats" }
+    RestaurantModel.findById(restid)
+    .then(restaurant => {
+        const newItem = new MenueModel({title: nItem.title})
+        restaurant.items.push(newItem)
+        return restaurant
     })
-    .catch( (error) => console.error)
-    .then(disconnect)
+    .then( rest => rest.save() )
+    .then( savedRest => {
+        res.send({
+            restaurant: savedRest.items
+        })
+    })
+    .catch(err => console.log(err))
+})
 
 
-    // foundRest.items.push(mItem)
+// update an item for single rest
+router.put('/restaurants/:restid/items/:itemsid', (req, res) => {
+    const restid = req.params.restid
+    const itemsid = req.params.itemsid
+    const itemUpdates = req.body
+    RestaurantModel.findById(restid)
+    .then(rest => {
+        let index = rest.items.findIndex( item => item._id == itemsid )
+        rest.items[index].title = itemUpdates.title
+        return rest
+    })
+    .then( rest => rest.save() )
+    .then( savedUpdatedRest => {
+        res.redirect(`/restaurants/${restid}/items/${itemsid}`)
+    })
+    .catch(err => console.log(err))
+})
 
-    console.log(foundRest)
 
-} // end func
-
-// addMenuItem("5e25fb73bb27291b0d1e044c", "White Mocha 33") // send a document as a new menu item to be added to subdocument
+// delete an item for single rest
+router.delete('/restaurants/:restid/items/:itemsid', (req, res) => {
+    const restid = req.params.restid
+    const itemsid = req.params.itemsid
+    RestaurantModel.findById(restid)
+    .then(rest => {
+        let index = rest.items.findIndex( item => item._id == itemsid )
+        rest.items.splice(index, 1)
+        return rest
+    })
+    .then( rest => rest.save() )
+    .then( savedUpdatedRest => {
+        res.redirect(`/restaurants`)
+    })
+    .catch(err => console.log(err))
+})
 
 
 

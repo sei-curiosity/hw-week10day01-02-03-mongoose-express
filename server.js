@@ -13,7 +13,7 @@ const bodyParser = require('body-parser')
 app.use(bodyParser.urlencoded( {extended: true} ))
 app.use(bodyParser.json())
 
-app.use(resRouters)
+app.use(resRouters)  // loading the controller router
 
 
 

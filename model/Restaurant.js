@@ -15,12 +15,15 @@ let MenuItemsSchema =new Schema({
 
 let RestaurantSchema = new Schema({
     name:String,
-    address:{street:String,zipcode:Number},
+    address:{
+        street:String,
+        zipcode:Number
+    },
     yelpUrl:String,
     items :[MenuItemsSchema]
 })
 
-module.exports={
-    RestaurantModel : RestaurantModel,
-    MenuItemsModle : MenuItemsModle
-} 
+const RestaurantModel = mongoose.model("Restaurant", RestaurantSchema)
+const MenuItemsModle = mongoose.model("MenuItems", MenuItemsSchema)
+
+module.exports= {RestaurantModel , MenuItemsModle} 

@@ -1,11 +1,13 @@
 const express = require("express")
-const {index, show, create, destroy, update} = require("./seed")
+const {index, show, create, destroy, update, destroyMenu,createMenu} = require("./seed")
 const router = express.Router()
 
-router.get("/", index);
-router.get("/:id", show)
-router.delete("/:id", destroy)
-router.post("/", create)
-router.patch("/:id", update)
+router.get("/restaurants", index);
+router.get("/restaurants/:id", show)
+router.delete("/restaurants/:id", destroy)
+router.post("/restaurants", create)
+router.patch("/restaurants/:id", update)
+router.delete("restaurants/:id/menus/muneId", destroyMenu)
+router.post("restaurants/:id/menus/muneId", createMenu)
 
 module.exports = router

@@ -10,8 +10,6 @@ const index = (req, res) => {
     )
 }
 
-
-
 const show = (req, res) => {
     const id = req.params.id
     Restaurant.findById(id)
@@ -73,32 +71,37 @@ const update = (req, res) => {
 }
 
 const createMenu = (req, res) => {
-    const params = req.body
-     const menu = new Menu(params)
-     menu.save()
-     .then(
-        menu => res.send(menu)
-     )
-     .catch(
-         err => res.send(err)
-     )
+
+
+        const id = req.params.id
+        const menuid = req.body
+        const createMenu = new TweetModel ({menuid})
+        Restaurant.findById(id)
+        .then((id)=> {
+            id.menu.push(createMenu)
+            return id
+        })
+        .then (id => id.save())
+        .catch(err => console.log(err))
+
+
+
  }
 
- const destroyMenu = (req, res) => {
+const destroyMenu = (req, res) => {
     const id = req.params.id
+    const menuid = req.params.menuId
     Restaurant.findById(id)
-    .then(
-        menu => menu.remove()
-        .then(
-          res.send(" deleted")
-        )
-        .catch(
-            err => res.send(err)
-        )
-    )
-    .catch(
-        err => res.send(err)
-    )
+    .then ((id) => {
+        let index = id.menu.findIndex(x => x._id == menuid)
+        if(index > -1) {
+            Restaurant.menu.splice(index, 1)
+        }
+        return id
+    })
+    .then(restaurant => restaurant.save())
+    .catch(err => console.log(err))
+
 }
 
 module.exports = {

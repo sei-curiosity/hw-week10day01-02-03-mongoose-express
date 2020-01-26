@@ -1,6 +1,6 @@
-const {RestaurantModel, MenuModel, db} = require("./schema")
+const {RestuarantModel, MenuModel, db} = require("./schema")
 let pizza = new MenuModel({title:"Pizza"});
-let Yumm = new RestaurantModel ({name: "Yumm", 
+let Yumm = new RestuarantModel ({name: "Yumm", 
                         adress: {street:"Waha street",zipcode:11655},
                         yelpUrl:"https://www.yelp.com/biz/monza-pizzeria-san-francisco?osq=delivery"})
 Yumm.items.push(pizza)

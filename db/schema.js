@@ -1,21 +1,14 @@
 const mongoose = require('mongoose');
-const url = `mongodb://localhost/restuarant-crud`
-mongoose.connect(url,{
-    useUnifiedTopology: true,
-     useNewUrlParser: true 
-    })
-const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-// db.once
 
-let Schema = mongoose.Schema
+const Schema = mongoose.Schema
 
-let MenuSchema = new Schema ({
+const MenuSchema = new Schema ({
     title: String
 })
 let Menu = mongoose.model("Menu",MenuSchema)
 
-let RestaurantSchema = new Schema ({
+
+const RestuarantSchema = new Schema ({
     name: String,
     address: {street:String,zipcode:Number},
     yelpUrl:String,
@@ -23,22 +16,8 @@ let RestaurantSchema = new Schema ({
 })
 
 
-let Restaurant = mongoose.model("Restuarant",RestaurantSchema)
+let Restuarant = mongoose.model("Restuarant",RestuarantSchema)
 
 
-module.exports = {
-    Restaurant,
-    Menu,
-    db
-}
-// let pizza = new MenuModel({title:"Pizza"});
-// let Yumm = RestaurantModel.create({name: "Yumm", 
-//                         adress: {street:"Waha street",zipcode:11655},
-//                         yelpUrl:"https://www.yelp.com/biz/monza-pizzeria-san-francisco?osq=delivery"})
-//                         Yumm.items.push(pizza)
-// .then((Restuarant) => {
-//     console.log(Restuarant);
-//   })
-//   .catch((error) => {
-//     console.log(error)
-//   })
+module.exports = Restuarant,Menu
+

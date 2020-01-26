@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Hello Express App</title>
+        <link rel="stylesheet" 
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" 
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" 
+        crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="/css/style.css">
+    </head>
+    <body>
+       <ul class="nav">
+  <li class="nav-item">
+    <a class="nav-link active" href="http://localhost:3000">Home</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="http://localhost:3000/shows">Show</a>
+  </li>
+  {{!-- <li class="nav-item">
+    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+  </li> --}}
+</ul>
+        {{{ body }}}
+
+        <h6>FOOTER GOES HERE AND WILL APPEAR ON EVERY VIEW</h6>
+    </body>
+</html>

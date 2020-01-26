@@ -1,4 +1,4 @@
-let Schema = require("../db/schema.js");
+let Schema = require("./schema.js.js");
 
 let RestaurantModel = Schema.RestaurantModel
 let MenuModel = Schema.MenuModel

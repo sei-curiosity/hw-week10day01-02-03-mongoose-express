@@ -4,11 +4,14 @@
   "description": "YUM!  Cookies!",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
   },
   "author": "SEI9",
   "license": "ISC",
   "dependencies": {
-    "mongoose": "^5.8.7"
+    "express": "^4.17.1",
+    "mongoose": "^5.8.7",
+    "nodemon": "^2.0.2"
   }
 }

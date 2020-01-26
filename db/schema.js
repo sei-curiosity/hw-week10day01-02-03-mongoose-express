@@ -28,5 +28,6 @@ let MenuItemsModle = mongoose.model("MenuItem",MenuItemsSchema)
 
 module.exports={
     RestaurantModel : RestaurantModel,
-    MenuItemsModle : MenuItemsModle
+    MenuItemsModle : MenuItemsModle,
+    db
 }

@@ -9,7 +9,8 @@ db.once('open', function(){
 })
 
 let Schema = mongoose.Schema
-// db.close();
+
+// db.close(); 
 
 let MenueitemsSchema =new Schema ({
     title: String

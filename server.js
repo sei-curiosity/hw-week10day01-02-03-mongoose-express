@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded( {extended:true} ))
 app.use(bodyParser.json())
 
 // register route files
-app.use(Routers)
+app.use("/",Routers)
 
 //server
 app.listen(3000,() => {

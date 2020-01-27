@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-let Restuarant = require('../db/schema')
-let Menu = require('../db/schema')
+let {Restuarant,Menu}= require('../db/schema')
+//let Menu = require('../db/schema')
 
 
 /* INDEX */
@@ -86,13 +86,13 @@ router.post('/restuarants', (req,res) => {
 router.post('/restuarants/:restuarantid',(req, res)=> {
     const id = req.params.restuarantid
     const body = req.body
-    const newItem = new Menu({
-      "title":body.title
+    const newItem = new Menu ({
+      "title": body.title
     })
     //const createItem = new Menu({"title": req.body.title})
     Restuarant.findById(id)
     .then((restuarant)=> {
-      // console.log("yes mate")
+      console.log(restuarant.items)
       restuarant.items.push(newItem)
         return restuarant
     })

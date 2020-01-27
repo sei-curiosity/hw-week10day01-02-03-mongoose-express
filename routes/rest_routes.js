@@ -4,18 +4,28 @@ let Restuarant = require('../db/schema')
 let Menu = require('../db/schema')
 
 
-
-
 /* INDEX */
 
 router.get('/restuarants', (req,res) => {
-Restuarant.find()
+  Restuarant.find({})
 .then(restuarant => {
-  res.status(200).json({restuarant:restuarant})
+  res.send({
+    restuarant:restuarant
+  })
         })
         .catch(error => console.error(error))
     })
 
+    //get all menu items for a restuarant
+router.get('/restuarants/:restuarantid/item' , (req,res) => {
+      const id = req.params.restuarantid
+      Restuarant.findById(id)
+      .then((restuarant) => {
+          res.send({
+              item:restuarant.items
+          })
+      })
+  })
 
 /* SHOW */
 
@@ -27,7 +37,18 @@ router.get('/restuarants/:id', (req,res)  =>{
   }).catch(console.error)
 });
 
-/* NEW*/
+//get single menu item 
+router.get('/restuarants/:restuarantid/item/:itemid',(req,res) => {
+  const id = req.params.restuarantid
+  const itemid = req.params.itemid
+  Restuarant.findById(id)
+  .then((restuarant) => {
+      const item = restuarant.items.find(item => item._id == itemid)
+      res.send({
+          item: item
+      })
+  }).catch(err => console.log(err))
+})
 
 
 /* CREATE */
@@ -62,18 +83,22 @@ router.post('/restuarants', (req,res) => {
      
   //})
 
-
-
-  router.post('/restuarants/:id/menu', (req,res) => {
-    const menu = req.body.restuarant.items
-  //   let newRest = new Restuarant(rest)
-  // //newRest.items.push(req.body.items)
-  //     newRest.save()
-          Menu.create(menu)
-          .then(menu => {
-          res.status(201).json({menu:menu});
-          })
-          .catch(console.error)
+router.post('/restuarants/:restuarantid',(req, res)=> {
+    const id = req.params.restuarantid
+    const body = req.body
+    const newItem = new Menu({
+      "title":body.title
+    })
+    //const createItem = new Menu({"title": req.body.title})
+    Restuarant.findById(id)
+    .then((restuarant)=> {
+      // console.log("yes mate")
+      restuarant.items.push(newItem)
+        return restuarant
+    })
+    .then (restuarant => restuarant.save())
+    .then((newItem)=>res.redirect(`/restuarants/${id}`))
+    .catch(err => console.log(err))
     })
 
 /* DELETE */
@@ -85,13 +110,21 @@ router.delete('/restuarants/:id', (req, res) => {
     .catch(console.error)
 })
 
-// router.delete('/restuarants/:id/Menu/:id', (req, res) => {
-//     const id = req.params.id
-//     Restaurant.findByIdAndDelete(id)
-//     .then (()=> {
-//       res.redirect('/restuarants/:id')
-//     })
-//   })
+router.delete('/restuarants/:restuarantid/items/:itemid',(req,res) => {
+  const id = req.params.restuarantid
+  const itemid = req.params.itemid
+  Restuarant.findById(id)
+  .then((restuarant) => {
+      let index = restuarant.items.findIndex(inx => inx._id == itemid)
+      if (index > -1) {
+        restuarant.items.splice(index,1)
+      }
+      return restuarant
+  })
+  .then (restuarant => restuarant.save())
+  .then(()=> res.redirect(`/restuarants/${id}`))
+  .catch(err => console.log(err))
+})
 
 /* UPDATE  */
 
@@ -107,6 +140,21 @@ router.patch('/restuarants/:id', (req,res) => {
   // Restuarant.findByIdAndUpdate(id,body)
   // .then((restuarant) => res.status(204))
   // .catch(console.error)
+})
+
+router.patch('/restuarants/:restuarantid/items/:itemid' , (req,res) => { 
+  const id = req.params.restuarantid
+  const itemid = req.params.itemid
+  const update = req.body
+  Restuarant.findById(id)
+  .then((restuarant) => {
+      let index = restuarant.items.findIndex(inx => inx._id == itemid)
+      restuarant.items[index].title = update.title
+      return restuarant})
+      .then (restuarant => restuarant.save())
+      .then(()=> res.redirect(`/restuarants/${id}`))
+      .catch(err => console.log(err))
+      
 })
 
 module.exports = router;

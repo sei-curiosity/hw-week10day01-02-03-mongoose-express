@@ -5,17 +5,14 @@ const Schema = mongoose.Schema
 const MenuSchema = new Schema ({
     title: String
 })
-let Menu = mongoose.model("Menu",MenuSchema)
-
-
 const RestuarantSchema = new Schema ({
     name: String,
     address: {street:String,zipcode:Number},
     yelpUrl:String,
-    items:[{ type: Schema.Types.ObjectId, ref: 'Menu'}]
+    items:[MenuSchema]
 })
 
-
+let Menu = mongoose.model("Menu",MenuSchema)
 let Restuarant = mongoose.model("Restuarant",RestuarantSchema)
 
 
